@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Summer Fridays at Archer Barnes</title>
+  <meta name="description" content="A backyard hangout in Fort Greene, Brooklyn. Every Friday, all summer long.">
+  <meta property="og:title" content="Summer Fridays at Archer Barnes">
+  <meta property="og:description" content="A backyard hangout in Fort Greene, Brooklyn. Every Friday, all summer long.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#4A5D3A">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Summer Fridays</h1>
+      <p class="hero__subtitle">at Archer Barnes</p>
+      <div class="hero__divider" aria-hidden="true">~</div>
+      <p class="hero__tagline">A backyard hangout in Fort Greene, Brooklyn.<br>Every Friday, all summer long.</p>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="hero__scroll-text">scroll</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+        <path d="M8 4L8 20M8 20L2 14M8 20L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </header>
+
+  <main>
+    <section class="status" aria-label="This week's status">
+      <div class="container">
+        <div id="status-container"></div>
+      </div>
+    </section>
+
+    <section class="weather" aria-label="Current weather">
+      <div class="container">
+        <div id="weather-container"></div>
+      </div>
+    </section>
+
+    <section class="info" aria-label="General information">
+      <div class="container">
+        <h2 class="section-heading">The Details</h2>
+        <div class="info__grid">
+          <div class="info__item">
+            <span class="info__label">Location</span>
+            <span class="info__value">5 Saint Felix, Apt 1<br>Fort Greene, Brooklyn<br>Feel free to let yourself in. Text us for the door code.</span>
+          </div>
+          <div class="info__item">
+            <span class="info__label">Hours</span>
+            <span class="info__value">Drop by anytime on Fridays. Seriously, anytime.</span>
+          </div>
+          <div class="info__item">
+            <span class="info__label">Wi-Fi</span>
+            <span class="info__value">Yes. Bring your laptop, get some work done.</span>
+          </div>
+          <div class="info__item">
+            <span class="info__label">Snacks</span>
+            <span class="info__value">Light snacks sometimes. BYOB always welcome.</span>
+          </div>
+          <div class="info__item">
+            <span class="info__label">The Vibe</span>
+            <span class="info__value">This is not a party. It's a backyard. Come as you are.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="themes" aria-label="Upcoming themes">
+      <div class="container">
+        <h2 class="section-heading">Upcoming Themes</h2>
+        <div id="themes-container"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Summer Fridays 2026</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
