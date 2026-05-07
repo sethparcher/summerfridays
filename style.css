@@ -39,6 +39,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: #000;
+}
+
+a:hover{
+  color: #909090;
+}
+
 .container {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -208,6 +216,14 @@ body {
 
 .status-banner--closed .status-banner__title {
   color: var(--color-accent-burg);
+}
+
+.status-banner__countdown {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-top: 14px;
 }
 
 .status-banner__note {

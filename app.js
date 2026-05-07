@@ -15,23 +15,21 @@ const SUMMER_FRIDAYS_CONFIG = {
 
   // Optional: a short note shown under the status
   // Leave empty "" if no note needed
-  statusNote: "Gates open around 2pm, stay as long as you like!",
+  statusNote: "Gates open around 3pm, stay as long as you like!",
 
   // Upcoming Friday themes
   // Each theme has a "date" and a "title"
   // Set title to "" for Fridays with no theme
   // Past Fridays are automatically hidden on the site
   themes: [
-    { date: "April 24, 2026",  title: "" },
-    { date: "May 1, 2026",     title: "" },
-    { date: "May 8, 2026",     title: "" },
+    { date: "May 8, 2026",     title: "Libery Season Opener: Seth and Reb are headed to the Liberty home opener. Wear seafoam! Garden closes aorund 6:30." },
     { date: "May 15, 2026",    title: "" },
     { date: "May 22, 2026",    title: "" },
     { date: "May 29, 2026",    title: "" },
-    { date: "June 5, 2026",    title: "Margaritaville — bring margaritas and limes" },
-    { date: "June 12, 2026",   title: "Vinyl & Vibes — bring your favorite record" },
+    { date: "June 5, 2026",    title: "" },
+    { date: "June 12, 2026",   title: "" },
     { date: "June 19, 2026",   title: "" },
-    { date: "June 26, 2026",   title: "Garden Party — wear florals" },
+    { date: "June 26, 2026",   title: "" },
     { date: "July 3, 2026",    title: "" },
     { date: "July 10, 2026",   title: "" },
     { date: "July 17, 2026",   title: "" },
@@ -79,6 +77,50 @@ const WEATHER_CODES = {
   99: { text: "Thunderstorm",    icon: "⛈" },
 };
 
+function getNextFriday3pm() {
+  const now = new Date();
+  const day = now.getDay();
+  const target = new Date(now);
+
+  if (day === 5) {
+    target.setHours(15, 0, 0, 0);
+    if (now >= target) {
+      target.setDate(target.getDate() + 7);
+    }
+  } else {
+    const daysUntil = (5 - day + 7) % 7;
+    target.setDate(now.getDate() + daysUntil);
+    target.setHours(15, 0, 0, 0);
+  }
+
+  return target;
+}
+
+function updateCountdown() {
+  const el = document.getElementById("countdown");
+  if (!el) return;
+
+  const now = new Date();
+  const isFridayAfter3 = now.getDay() === 5 && now.getHours() >= 15;
+
+  if (isFridayAfter3) {
+    el.textContent = "The backyard is open now!";
+    return;
+  }
+
+  const target = getNextFriday3pm();
+  const diff = target - now;
+  const totalHours = Math.floor(diff / (1000 * 60 * 60));
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+
+  const parts = [];
+  if (days > 0) parts.push(`${days} day${days !== 1 ? "s" : ""}`);
+  parts.push(`${hours} hour${hours !== 1 ? "s" : ""}`);
+
+  el.textContent = parts.join(" and ") + " until the backyard opens";
+}
+
 function renderStatus() {
   const container = document.getElementById("status-container");
   const { status, nextFriday, statusNote } = SUMMER_FRIDAYS_CONFIG;
@@ -93,6 +135,7 @@ function renderStatus() {
     <div class="status-banner__date">${nextFriday}</div>
     <div class="status-banner__divider" aria-hidden="true"></div>
     <div class="status-banner__title">${heading}</div>
+    <div class="status-banner__countdown" id="countdown"></div>
   `;
 
   if (statusNote) {
@@ -101,6 +144,9 @@ function renderStatus() {
 
   banner.innerHTML = html;
   container.appendChild(banner);
+
+  updateCountdown();
+  setInterval(updateCountdown, 60 * 1000);
 }
 
 function renderThemes() {
