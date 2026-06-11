@@ -16,30 +16,6 @@ const SUMMER_FRIDAYS_CONFIG = {
   // Optional: a short note shown under the status
   // Leave empty "" if no note needed
   statusNote: "Gates open around 3pm, stay as long as you like!",
-
-  // Upcoming Friday themes
-  // Each theme has a "date" and a "title"
-  // Set title to "" for Fridays with no theme
-  // Past Fridays are automatically hidden on the site
-  themes: [
-    { date: "May 8, 2026",     title: "Libery Season Opener: Seth and Reb are headed to the Liberty home opener. Wear seafoam! Garden closes aorund 6:30." },
-    { date: "May 15, 2026",    title: "" },
-    { date: "May 22, 2026",    title: "" },
-    { date: "May 29, 2026",    title: "" },
-    { date: "June 5, 2026",    title: "" },
-    { date: "June 12, 2026",   title: "" },
-    { date: "June 19, 2026",   title: "" },
-    { date: "June 26, 2026",   title: "" },
-    { date: "July 3, 2026",    title: "" },
-    { date: "July 10, 2026",   title: "" },
-    { date: "July 17, 2026",   title: "" },
-    { date: "July 24, 2026",   title: "" },
-    { date: "July 31, 2026",   title: "" },
-    { date: "August 7, 2026",  title: "" },
-    { date: "August 14, 2026", title: "" },
-    { date: "August 21, 2026", title: "" },
-    { date: "August 28, 2026", title: "" },
-  ],
 };
 
 // ============================================================
@@ -147,52 +123,6 @@ function renderStatus() {
 
   updateCountdown();
   setInterval(updateCountdown, 60 * 1000);
-}
-
-function renderThemes() {
-  const container = document.getElementById("themes-container");
-  const { themes } = SUMMER_FRIDAYS_CONFIG;
-
-  if (!themes || themes.length === 0) return;
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const upcoming = themes.filter(theme => {
-    const d = new Date(theme.date + " 23:59:59");
-    return d >= today;
-  });
-
-  if (upcoming.length === 0) return;
-
-  const list = document.createElement("ul");
-  list.className = "theme-list";
-
-  upcoming.forEach((theme, index) => {
-    const li = document.createElement("li");
-    const hasTheme = theme.title && theme.title.trim() !== "";
-    const isNext = index === 0;
-
-    li.className = "theme-item";
-    if (hasTheme) li.classList.add("theme-item--themed");
-    else li.classList.add("theme-item--no-theme");
-    if (isNext) li.classList.add("theme-item--next");
-
-    const d = new Date(theme.date);
-    const displayDate = d.toLocaleDateString("en-US", { month: "long", day: "numeric" });
-
-    li.innerHTML = `
-      <div class="theme-item__date">${displayDate}</div>
-      ${hasTheme
-        ? `<div class="theme-item__title">${theme.title}</div>`
-        : `<div class="theme-item__no-theme">Open hang — no theme</div>`
-      }
-    `;
-
-    list.appendChild(li);
-  });
-
-  container.appendChild(list);
 }
 
 function getNextFridayDate() {
@@ -323,7 +253,6 @@ function initScrollReveal() {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderStatus();
-  renderThemes();
   fetchWeather();
   initScrollReveal();
 });
